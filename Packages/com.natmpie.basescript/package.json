@@ -1,0 +1,17 @@
+{
+  "name": "com.natmpie.basescript",
+  "version": "1.0.0",
+  "displayName": "Base Script",
+  "description": "A reusable, scalable base script for Unity project using ScriptableObjects for event.",
+  "unity": "2022.3",
+  "author": {
+    "name": "natmpie",
+    "email": "natmpie@email.com",
+    "url": "https://github.com/NATMP"
+  },
+  "keywords": [
+    "event",
+    "scriptableobject",
+    "unity"
+  ]
+}
