@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Units;
+using Stats;
 
 namespace CardSystem
 {
     public class CardManager : MonoBehaviour
     {
-        private readonly Dictionary<BuffType, ICardBuffStrategy> _buffStrategies =
-            new Dictionary<BuffType, ICardBuffStrategy>
+        private readonly Dictionary<BuffType, IStatModifierFactory> _buffModifierFactories =
+            new Dictionary<BuffType, IStatModifierFactory>
             {
-                { BuffType.Add, new AddBuffStrategy() },
-                { BuffType.Multiply, new MultiplyBuffStrategy() },
-                { BuffType.Override, new OverrideBuffStrategy() }
+                { BuffType.Add, new AddModifierFactory() },
+                { BuffType.Multiply, new MultiplyModifierFactory() },
+                { BuffType.MultiplyPercent, new MultiplyPercentModifierFactory() }
             };
 
         [SerializeField] private List<SOCardConfig> allCards;
@@ -19,7 +20,6 @@ namespace CardSystem
 
         public SOCardConfig ChooseCard()
         {
-            // Example: random pick, you can implement UI selection
             var card = allCards[Random.Range(0, allCards.Count)];
             selectedCards.Add(card);
             return card;
@@ -27,12 +27,10 @@ namespace CardSystem
 
         public void ApplyCardBuff(SOCardConfig card, UnitBase unit)
         {
-            var stat = unit[card.targetStat];
-            if (stat == null) return;
-
-            if (_buffStrategies.TryGetValue(card.buffType, out var strategy))
+            if (_buffModifierFactories.TryGetValue(card.buffType, out var factory))
             {
-                strategy.Apply(stat, card.buffValue);
+                var modifier = factory.CreateModifier(card);
+                unit.Stats.ApplyBuff(modifier);
             }
         }
     }

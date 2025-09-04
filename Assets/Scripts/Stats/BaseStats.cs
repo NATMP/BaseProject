@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stats
@@ -10,7 +9,6 @@ namespace Stats
         public StatType statType;
         public float initValue;
         public float currentValue;
-
         #region +-*/pow
 
         public void MultiplicationStat(float value)

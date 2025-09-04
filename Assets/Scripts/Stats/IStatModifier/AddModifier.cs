@@ -1,6 +1,6 @@
 namespace Stats
 {
-    public class UpgradeModifier : IStatModifier
+    public class AddModifier : IStatModifier
     {
         public StatType TargetStat;
         public float UpgradeValue;

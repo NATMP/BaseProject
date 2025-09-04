@@ -15,11 +15,7 @@ namespace Units.Config
         public string DieVFXAddr;
         public UnitType UnitType;
         public TeamType TeamType;
-        [TableList] public List<BaseStats> StatsList;
-        public BaseStats GetStat(StatType type)
-        {
-            return StatsList.Find(s => s.statType == type);
-        }
+        [TableList] public ListStats StatsList;
     }
     public enum UnitType
     {

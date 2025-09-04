@@ -18,6 +18,7 @@ namespace CardSystem
     {
         Add,
         Multiply,
-        Override
+        Override,
+        MultiplyPercent,
     }
 }
